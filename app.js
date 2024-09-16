@@ -8,6 +8,9 @@ const app = express();
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+//
+app.use(express.urlencoded({ extended: true }));
+
 // Use Routes
 app.use("/", indexRouter);
 const PORT = 3000;

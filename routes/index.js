@@ -1,6 +1,8 @@
 const { Router } = require('express');
 const router = Router();
 
+
+
 const messages = [
     {
         text: "Hi there!",
@@ -15,9 +17,11 @@ const messages = [
 ];
 
 router.get("/", (req, res)=>{
+    const msgIndex = req.params.msgIndex;
     res.render("index", {
         title:"Mini-Message-Board",
-        messages: messages
+        messages: messages,
+        msgIndex
     })
 })
 
@@ -25,11 +29,20 @@ router.get("/new", (req, res) => {
     res.render("form");
 });
 
+router.get("/:msgIndex", (req, res) => {
+    const msgIndex = req.params.msgIndex;
+    res.render("index", {
+        title:"Mini-Message-Board",
+        messages: [messages[msgIndex]],
+        msgIndex
+        })
+});
+
 router.post("/new", (req, res) => {
+    console.log(req.body);
     const author = req.body.author;
     const message = req.body.msg;
-    const time = new Date();
-    messages.push({text: message, user: author, added: time});
+    messages.push({text: message, user: author, added: new Date()});
     res.redirect("/");
 })
 module.exports = router;

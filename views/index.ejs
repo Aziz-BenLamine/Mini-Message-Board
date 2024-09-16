@@ -8,14 +8,22 @@
 <body>
     <h1><%= title %></h1>
     <hr>
-    <% messages.forEach(message => { %>
+    <% messages.forEach((message, index) => { %>
         <li>
             <div>
                 <h3>From: <%=message.user%></h3>
                 <p><%=message.text%></p>
                 <p>Date: <%=message.added.getMonth()%>-<%=message.added.getDate()%>-<%=message.added.getFullYear()%></p>
+                <% if(msgIndex == null) { %>
+                <a href="/<%= index %>"><button>Open</button></a>
+                <% }%>
             </div>
         </li>
     <% }); %>
+    <%if(msgIndex >= 0){%>
+        <a href="/"><button>Back</button></a>        
+    <%}else{%>    
+        <a href="/new"><button>New</button></a>    
+    <%}%>    
 </body>
 </html>

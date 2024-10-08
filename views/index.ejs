@@ -4,28 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <hr />
-    <% messages.forEach((message, index) => { %>
-    <li>
-      <div>
-        <h3>From: <%=message.username%></h3>
-        <p><%=message.text%></p>
-        <p>
-          Date:
-          <%=message.added.getMonth()%>-<%=message.added.getDate()%>-<%=message.added.getFullYear()%>
-        </p>
-        <% if(msgIndex == null) { %>
-        <a href="/<%= index %>"><button>Open</button></a>
-        <% }%>
+    <div class="container">
+      <h1><%= title %></h1>
+      <hr />
+      <ul class="message-list">
+        <% messages.forEach((message, index) => { %>
+        <li class="message-item">
+          <div class="message-card">
+            <h3 class="message-user">From: <%= message.username %></h3>
+            <p class="message-text"><%= message.text %></p>
+            <p class="message-date">
+              Date: <%= message.added.toDateString() %>
+            </p>
+            <% if (msgIndex == null) { %>
+            <a href="/<%= index %>" class="btn">Open</a>
+            <% } %>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+      <div class="action-button">
+        <% if (msgIndex >= 0) { %>
+        <a href="/" class="btn">Back</a>
+        <% } else { %>
+        <a href="/new" class="btn">New</a>
+        <% } %>
       </div>
-    </li>
-    <% }); %> <%if(msgIndex >= 0){%>
-    <a href="/"><button>Back</button></a>
-    <%}else{%>
-    <a href="/new"><button>New</button></a>
-    <%}%>
+    </div>
   </body>
 </html>

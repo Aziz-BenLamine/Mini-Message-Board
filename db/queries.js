@@ -5,11 +5,15 @@ async function getAllMessages() {
   return rows;
 }
 
-async function insertUsername(username) {
-  await pool.query("INSERT INTO usernames (username) VALUES ($1)", [username]);
+async function insertMessage(message) {
+  const { text, username, added } = message;
+  await pool.query(
+    "INSERT INTO messages (text, username, added) VALUES ($1, $2, $3)",
+    [text, username, added]
+  );
 }
 
 module.exports = {
   getAllMessages,
-  insertUsername,
+  insertMessage,
 };

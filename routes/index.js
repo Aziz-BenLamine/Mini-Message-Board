@@ -37,11 +37,17 @@ router.get("/:msgIndex", async (req, res) => {
   }
 });
 
-router.post("/new", (req, res) => {
+router.post("/new", async (req, res) => {
   console.log(req.body);
   const author = req.body.author;
   const message = req.body.msg;
-  messages.push({ text: message, user: author, added: new Date() });
+
+  const newMessage = {
+    text: message,
+    username: author,
+    added: new Date(),
+  };
+  await userController.insertMessage(newMessage);
   res.redirect("/");
 });
 module.exports = router;

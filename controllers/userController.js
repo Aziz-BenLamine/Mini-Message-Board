@@ -11,25 +11,17 @@ const getMessages = async () => {
     throw error;
   }
 };
-/*
-async function getMessages(req, res) {
-  const messages = await db.getAllMessages();
-  return messages;
-  //res.send("Usernames: " + usernames.map((user) => user.username).join(", "));
-}
-*/
-async function createUsernameGet(req, res) {
-  // render the form
-}
 
-async function createUsernamePost(req, res) {
-  const { username } = req.body;
-  await db.insertUsername(username);
-  res.redirect("/");
-}
+const insertMessage = async (message) => {
+  try {
+    await db.insertMessage(message);
+  } catch (error) {
+    console.error("Error inserting message:", error);
+    throw error;
+  }
+};
 
 module.exports = {
   getMessages,
-  createUsernameGet,
-  createUsernamePost,
+  insertMessage,
 };

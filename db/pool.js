@@ -1,9 +1,13 @@
 const { Pool } = require("pg");
+const dotenv = require("dotenv");
+
+dotenv.config();
+
+const connectionString = process.env.DATABASE_PUBLIC_URL;
 
 module.exports = new Pool({
-  host: "localhost",
-  user: "cryptexred",
-  database: "messaging_app",
-  password: "123",
-  port: 5432,
+  connectionString,
+  ssl: {
+    rejectUnauthorized: false,
+  },
 });

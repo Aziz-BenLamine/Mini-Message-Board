@@ -13,10 +13,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
 
 // Use Routes
-const indexRouter = require("./routes/index"); // Ensure this is correctly required
+const indexRouter = require("./routes/index");
 app.use("/", indexRouter);
 
-const PORT = 3000;
+const PORT = 3000 || process.env.PORT;
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Express app listening to Port ${PORT}`);
 });
